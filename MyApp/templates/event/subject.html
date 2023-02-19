@@ -1,0 +1,17 @@
+{% extends 'event/base.html' %}
+
+{% block content %}
+   
+    <h1>Subjects....</h1>
+<br/>
+<table class="table table-striped table-hover">
+    {% for subject in subject_list %}
+        <tr>
+            <td>
+                <a href="{% url 'show-subject' subject.id %}">{{ subject }}</a>
+            </td>
+        </tr>
+    {% endfor %}
+</table>
+    
+{% endblock %}
