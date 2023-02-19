@@ -1,0 +1,21 @@
+{% extends 'event/base.html' %}
+
+{% block content %}
+    <center>
+    {% if searched %}
+        <h1>You Searched For {{ searched }}</h1>
+        <br/>
+        {% for subject in subjects %}
+            <a href="{% url 'show-subject' subject.id %}">{{ subject }}</a><br/>
+        {% endfor %}
+    {% else %}
+    <h1>Hey! You Forgot to Search For A Subject...</h1>
+    {% endif %}
+
+
+    
+
+
+
+    </center>
+{% endblock %}

@@ -6,6 +6,15 @@ from .models import Event, Subject
 from .forms import SubjectForm
 from django.http import HttpResponseRedirect
 
+def search_subjects(request):
+    if request.method == "POST":
+        searched = request.POST['searched']
+        subjects = Subject.objects.filter(name__contains=searched)
+        return render(request, 'event/search_subjects.html', {'searched':searched, 'subjects':subjects})
+    else:
+        return render(request, 'event/search_subjects.html', {})
+
+
 def show_subject(request, subject_id):
     subject = Subject.objects.get(pk=subject_id)
     return render(request, 'event/show_subject.html', {'subject': subject})
@@ -55,7 +64,7 @@ def home(request, year=datetime.now().year, month=datetime.now().strftime('%B'))
         "name" : name,
         "year" : year,
         "month" : month,
-        "month_number" : month_number,
+        "month_number" : month_number, 
         "cal" : cal,
         "current_year" : current_year,
         "time" : time,

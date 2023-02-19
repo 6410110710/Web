@@ -8,6 +8,6 @@ urlpatterns = [
     path('add_subject', views.add_subject, name="add-subject"),
     path('list_subject', views.list_subject, name="list-subjects"),
     path('show_subject/<subject_id>', views.show_subject, name='show-subject'),
-    
+    path('search_subjects', views.search_subjects, name='search-subjects'),
 
 ]   
