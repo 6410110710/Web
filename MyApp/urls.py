@@ -10,5 +10,6 @@ urlpatterns = [
     path('show_subject/<subject_id>', views.show_subject, name='show-subject'),
     path('search_subjects', views.search_subjects, name='search-subjects'),
     path('update_subject/<subject_id>', views.update_subject, name='update-subject'),
+    path('add_event', views.add_event, name="add-event"),
 
 ]   
