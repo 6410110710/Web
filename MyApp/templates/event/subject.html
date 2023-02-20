@@ -10,6 +10,9 @@
             <td>
                 <a href="{% url 'show-subject' subject.id %}">{{ subject }}</a>
             </td>
+            <td align="right">
+                <a href="{% url 'update-subject' subject.id %}" class="btn btn-outline-dark btn-sm">Update</a>
+            </td>
         </tr>
     {% endfor %}
 </table>

@@ -1,10 +1,20 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 import calendar
 from calendar import HTMLCalendar
 from datetime import datetime
 from .models import Event, Subject
 from .forms import SubjectForm
 from django.http import HttpResponseRedirect
+
+
+def update_subject(request, subject_id):
+    subject = Subject.objects.get(pk=subject_id)
+    form = SubjectForm(request.POST or None, instance=subject)
+    if form.is_valid():
+        form.save()
+        return redirect('list-subjects')
+    
+    return render(request, 'event/update_subject.html', {'subject': subject,'form':form})
 
 def search_subjects(request):
     if request.method == "POST":

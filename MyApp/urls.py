@@ -9,5 +9,6 @@ urlpatterns = [
     path('list_subject', views.list_subject, name="list-subjects"),
     path('show_subject/<subject_id>', views.show_subject, name='show-subject'),
     path('search_subjects', views.search_subjects, name='search-subjects'),
+    path('update_subject/<subject_id>', views.update_subject, name='update-subject'),
 
 ]   
