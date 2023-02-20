@@ -21,6 +21,15 @@ def add_event(request):
     
     return render(request, 'event/add_event.html', {'form':form, 'submitted':submitted})
 
+def update_event(request, event_id):
+    event = Event.objects.get(pk=event_id)
+    form = EventForm(request.POST or None, instance=event)
+    if form.is_valid():
+        form.save()
+        return redirect('list-events')
+    
+    return render(request, 'event/update_event.html', {'event': event,'form':form})
+
 
 def update_subject(request, subject_id):
     subject = Subject.objects.get(pk=subject_id)
