@@ -5,6 +5,23 @@ from datetime import datetime
 from .models import Event, Subject
 from .forms import SubjectForm, EventForm
 from django.http import HttpResponseRedirect
+from django.http import HttpResponse
+
+def subject_text(request):
+    response = HttpResponse(content_type='textplain')
+    response['Content-Disposition'] = 'attachment; filename=subject.text'
+
+    subjects = Subject.objects.all()
+
+    lines = []
+    # loop and Output
+    for subject in subjects:
+        lines.append(f'{subject.name}\n{subject.subject_id}\n{subject.classroom}\n\n')
+    
+    #Write text file
+    response.writelines(lines)
+    return response
+
 
 def delete_subject(request, subject_id):
     subject = Subject.objects.get(pk=subject_id)
