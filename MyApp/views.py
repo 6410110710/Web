@@ -66,7 +66,7 @@ def show_subject(request, subject_id):
 
 
 def list_subject(request):
-    subject_list = Subject.objects.all()
+    subject_list = Subject.objects.all().order_by('name')
     return render(request, 'event/subject.html', {'subject_list': subject_list})
 
 
@@ -86,7 +86,7 @@ def add_subject(request):
     return render(request, 'event/add_subject.html', {'form':form, 'submitted':submitted})
 
 def all_events(request):
-    event_list = Event.objects.all()
+    event_list = Event.objects.all().order_by('event_date')
     return render(request, 'event/event_list.html', {'event_list': event_list})
 
 
