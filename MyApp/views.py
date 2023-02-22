@@ -6,6 +6,17 @@ from .models import Event, Subject
 from .forms import SubjectForm, EventForm
 from django.http import HttpResponseRedirect
 
+def delete_subject(request, subject_id):
+    subject = Subject.objects.get(pk=subject_id)
+    subject.delete()
+    return redirect('list-subjects')
+
+def delete_event(request, event_id):
+    event = Event.objects.get(pk=event_id)
+    event.delete()
+    return redirect('list-events')
+
+
 def add_event(request):
     submitted = False
     if request.method == "POST":

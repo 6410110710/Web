@@ -12,5 +12,7 @@ urlpatterns = [
     path('update_subject/<subject_id>', views.update_subject, name='update-subject'),
     path('add_event', views.add_event, name="add-event"),
     path('update_event/<event_id>', views.update_event, name='update-event'),
+    path('delete_event/<event_id>', views.delete_event, name='delete-event'),
+    path('delete_subject/<subject_id>', views.delete_subject, name='delete-subject'),
 
-]   
+    ]   

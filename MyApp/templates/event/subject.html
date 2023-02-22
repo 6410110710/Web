@@ -13,6 +13,9 @@
             <td align="right">
                 <a href="{% url 'update-subject' subject.id %}" class="btn btn-outline-dark btn-sm">Update</a>
             </td>
+            <td align="right">
+                <a href="{% url 'delete-subject' subject.id %}" class="btn btn-outline-danger btn-sm">Delete</a>
+            </td>
         </tr>
     {% endfor %}
 </table>
