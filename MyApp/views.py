@@ -6,6 +6,9 @@ from .models import Event, Subject
 from .forms import SubjectForm, EventForm
 from django.http import HttpResponseRedirect
 from django.http import HttpResponse
+from django.core.paginator import Paginator
+
+
 
 def subject_text(request):
     response = HttpResponse(content_type='textplain')
@@ -84,7 +87,13 @@ def show_subject(request, subject_id):
 
 def list_subject(request):
     subject_list = Subject.objects.all().order_by('name')
-    return render(request, 'event/subject.html', {'subject_list': subject_list})
+
+    #Set up Pagination
+    p = Paginator(Subject.objects.all(), 3)
+    page = request.GET.get('page')
+    subjects = p.get_page(page)
+
+    return render(request, 'event/subject.html', {'subject_list': subject_list,'subjects': subjects})
 
 
 def add_subject(request):
