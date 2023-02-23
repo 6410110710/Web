@@ -28,17 +28,36 @@ Current Page: {{ subjects.number }}<br/>
 Number of Pages: {{ subjects.paginator.num_pages }}<br/>
 <hr><br/><br/>
 -->
+
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+
 {% if subjects.has_previous %}
-    <a href="?page=1">&laquo First</a>
-    <a href="?page={{ subjects.previous_page_number }}">Previous</a>
+
+<li class="page-item"><a class="page-link" href="?page=1">&laquo First</a></li>
+<li class="page-item"><a class="page-link" href="?page={{ subjects.previous_page_number }}">Previous</a></li>
 
 {% endif %} 
+<!--
+<li class="page-item disabled"><a href="#" class="page-link">Page {{ subjects.number }} of {{ subjects.paginator.num_pages }}</a></li>
+    -->
 
-Page {{ subjects.number }} of {{ subjects.paginator.num_pages }}
+
+{% for i in nums %}
+
+<li class="page-item"><a class="page-link" href="?page={{ forloop.counter }}">{{ forloop.counter }}</a></li>
+
+{% endfor %}
+
 
 {% if subjects.has_next %}
-    <a href="?page={{ subjects.next_page_number }}">Next</a>
-    <a href="?page={{ subjects.paginator.num_pages }}">Last &raquo</a>
+
+<li class="page-item"><a class="page-link" href="?page={{ subjects.next_page_number }}">Next</a></li>
+<li class="page-item"><a class="page-link" href="?page={{ subjects.paginator.num_pages }}">Last &raquo</a></li>
 
 {% endif %}
+
+
+    </ul>
+</nav>
 {% endblock %}

@@ -86,14 +86,15 @@ def show_subject(request, subject_id):
 
 
 def list_subject(request):
-    subject_list = Subject.objects.all().order_by('name')
+    #subject_list = Subject.objects.all().order_by('name')
+    subject_list = Subject.objects.all()
 
     #Set up Pagination
-    p = Paginator(Subject.objects.all(), 3)
+    p = Paginator(Subject.objects.all(), 2)
     page = request.GET.get('page')
     subjects = p.get_page(page)
-
-    return render(request, 'event/subject.html', {'subject_list': subject_list,'subjects': subjects})
+    nums = "a" * subjects.paginator.num_pages
+    return render(request, 'event/subject.html', {'subject_list': subject_list,'subjects': subjects, 'nums': nums})
 
 
 def add_subject(request):
