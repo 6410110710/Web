@@ -17,4 +17,8 @@ def login_user(request):
     else:
         return render(request, 'authenticate/login.html', {})
 
-# Create your views here.
+def logout_user(request):
+    logout(request)
+    messages.success(request, ('You Were Logged Out'))
+    return redirect('home')
+
