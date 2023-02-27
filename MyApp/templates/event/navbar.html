@@ -11,8 +11,10 @@
               Event
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="{% url 'list-events'  %}">Event List</a></li>
+              <li><a class="dropdown-item" href="{% url 'list-events'  %}">All Event</a></li>
+              {% if user.is_authenticated %}    
               <li><a class="dropdown-item" href="{% url 'add-event'  %}">Add Event</a></li>
+              {% endif %}
             </ul>
           </li>
           <li class="nav-item dropdown">
@@ -20,8 +22,10 @@
               Subject
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="{% url 'list-subjects'  %}">Subject List</a></li>
+              <li><a class="dropdown-item" href="{% url 'list-subjects'  %}">All Subject</a></li>
+              {% if user.is_authenticated %}    
               <li><a class="dropdown-item" href="{% url 'add-subject'  %}">Add Subject</a></li>
+              {% endif %}
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" href="{% url 'subject_text'  %}">Subject Text</a></li>
             </ul>
