@@ -6,7 +6,7 @@ class Subject(models.Model):
     name = models.CharField("Subject Name",max_length=120) 
     subject_id = models.CharField(max_length=300)
     classroom = models.CharField(max_length=120)
-
+    owner = models.IntegerField("Subject Owner", blank=False, default=1)
     def __str__(self):
         return self.name
 

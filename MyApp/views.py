@@ -102,7 +102,10 @@ def add_subject(request):
     if request.method == "POST":
         form = SubjectForm(request.POST)
         if form.is_valid():
-            form.save()
+            subject = form.save(commit=False)
+            subject.owner = request.user.id #logged in user
+            subject.save()
+            #form.save()
             return HttpResponseRedirect('/add_subject?submitted=True')
     else:
         form = SubjectForm

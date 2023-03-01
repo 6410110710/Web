@@ -13,7 +13,7 @@ class SubjectForm(ModelForm):
             'classroom': '',
         }
         widgets = {
-            'name': forms.TextInput(attrs={'class':'form-control', 'placeholder': 'Event Name'}), 
+            'name': forms.TextInput(attrs={'class':'form-control', 'placeholder': 'Subject Name'}), 
             'subject_id': forms.TextInput(attrs={'class':'form-control', 'placeholder': 'Subject ID'}),
             'classroom': forms.TextInput(attrs={'class':'form-control', 'placeholder': 'Classroom'}),
         }
