@@ -3,7 +3,7 @@ import calendar
 from calendar import HTMLCalendar
 from datetime import datetime
 from .models import Event, Subject
-from .forms import SubjectForm, EventForm
+from .forms import SubjectForm, EventForm, EventFormAdmin
 from django.http import HttpResponseRedirect
 from django.http import HttpResponse
 from django.core.paginator import Paginator
@@ -40,12 +40,26 @@ def delete_event(request, event_id):
 def add_event(request):
     submitted = False
     if request.method == "POST":
-        form = EventForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect('/add_event?submitted=True')
+        if request.user.is_superuser:
+            form = EventFormAdmin(request.POST)
+            if form.is_valid():
+                form.save()
+                return HttpResponseRedirect('/add_event?submitted=True')
+        else:
+            form = EventForm(request.POST)
+            
+            if form.is_valid():
+                event = form.save(commit=False)
+                event.admin = request.user #logged in user
+                event.save()
+                #form.save()
+                return HttpResponseRedirect('/add_event?submitted=True')
     else:
-        form = EventForm
+        #just going to page ,not submitting
+        if request.user.is_superuser:
+            form = EventFormAdmin
+        else:
+            form = EventForm
         if 'submitted' in request.GET:
             submitted = True
 
@@ -54,7 +68,10 @@ def add_event(request):
 
 def update_event(request, event_id):
     event = Event.objects.get(pk=event_id)
-    form = EventForm(request.POST or None, instance=event)
+    if request.user.is_superuser:
+        form = EventFormAdmin(request.POST or None, instance=event)
+    else:
+        form = EventForm(request.POST or None, instance=event)
     if form.is_valid():
         form.save()
         return redirect('list-events')

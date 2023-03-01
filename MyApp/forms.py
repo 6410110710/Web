@@ -17,7 +17,8 @@ class SubjectForm(ModelForm):
             'subject_id': forms.TextInput(attrs={'class':'form-control', 'placeholder': 'Subject ID'}),
             'classroom': forms.TextInput(attrs={'class':'form-control', 'placeholder': 'Classroom'}),
         }
-class EventForm(ModelForm):
+#admin event form
+class EventFormAdmin(ModelForm):
     class Meta:
         model = Event
         fields = ('name','description', 'event_date', 'subject','attendees','admin')
@@ -36,4 +37,25 @@ class EventForm(ModelForm):
             'subject': forms.Select(attrs={'class':'form-select', 'placeholder': 'Subject'}),
             'attendees': forms.SelectMultiple(attrs={'class':'form-select', 'placeholder': 'Attendees'}),
             'admin': forms.Select(attrs={'class':'form-select', 'placeholder': 'Admin'}),
+        }
+
+#User Event Form
+class EventForm(ModelForm):
+    class Meta:
+        model = Event
+        fields = ('name','description', 'event_date', 'subject','attendees')
+        labels = {
+            'name': '',
+            'description': '',
+            'event_date': 'YYYY-MM-DD HH:MM:SS',
+            'subject': 'Subject',
+            'attendees': 'Attendees',
+
+        }
+        widgets = {
+            'name': forms.TextInput(attrs={'class':'form-control', 'placeholder': 'Event Name'}), 
+            'description': forms.Textarea(attrs={'class':'form-control', 'placeholder': 'Description'}),
+            'event_date': forms.DateTimeInput(attrs={'class':'form-control', 'placeholder': 'Event Date'}),
+            'subject': forms.Select(attrs={'class':'form-select', 'placeholder': 'Subject'}),
+            'attendees': forms.SelectMultiple(attrs={'class':'form-select', 'placeholder': 'Attendees'}),
         }
