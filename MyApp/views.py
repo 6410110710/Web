@@ -7,6 +7,7 @@ from .forms import SubjectForm, EventForm, EventFormAdmin
 from django.http import HttpResponseRedirect
 from django.http import HttpResponse
 from django.core.paginator import Paginator
+from django.contrib import messages
 
 
 
@@ -33,8 +34,13 @@ def delete_subject(request, subject_id):
 
 def delete_event(request, event_id):
     event = Event.objects.get(pk=event_id)
-    event.delete()
-    return redirect('list-events')
+    if request.user == event.admin:
+        event.delete()
+        messages.success(request, ("Event Deleted!!"))
+        return redirect('list-events')
+    else:
+        messages.success(request, ("You Aren't Authorize To Delete This Event!!"))
+        return redirect('list-events')
 
 
 def add_event(request):
