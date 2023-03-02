@@ -10,6 +10,14 @@ from django.core.paginator import Paginator
 from django.contrib import messages
 
 
+def my_events(request):
+    if request.user.is_authenticated:
+        me = request.user.id
+        events = Event.objects.filter(attendees=me) 
+        return render(request, 'event/my_events.html', {"events":events})
+    else:
+        messages.success(request, ("You Aren't Authorize To Veiw This Page!!"))
+        return redirect('home')
 
 def subject_text(request):
     response = HttpResponse(content_type='textplain')
